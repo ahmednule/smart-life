@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-emerald-50 min-h-screen;
+  }
+  
+  html {
+    @apply scroll-smooth
+  }
