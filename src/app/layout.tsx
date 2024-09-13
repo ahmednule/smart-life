@@ -1,45 +1,37 @@
-import type { Metadata } from "next";
+"use client";
+
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "../providers";
-import { Toaster } from "react-hot-toast";
+import "node_modules/react-modal-video/css/modal-video.css";
+import "../styles/index.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-//importing the fontawesome stypes manually
-import "@fortawesome/fontawesome-svg-core/styles.css";
-
-// Get the configuration object
-import { config } from "@fortawesome/fontawesome-svg-core";
-import Footer from "@/components/page/home-page/Footer";
-import Header from "@/components/ui/header/Header";
-
-// Prevent Font Awesome from adding its CSS since we did it manually above
-config.autoAddCss = false;
-
-export const metadata: Metadata = {
-  title: "smartLife",
-  description: "Revolutionizing the transportation industry with an AI powered platform",
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-      <Providers>
-      <Toaster />
-      <Header />
-      {children}
-      <Footer />
-      </Providers>
+    <html suppressHydrationWarning lang="en">
+      {/*
+        <head /> will contain the components returned by the nearest parent
+        head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+      */}
+      <head />
+
+      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+          <ScrollToTop />
+        </Providers>
       </body>
     </html>
   );
 }
+
+import { Providers } from "./providers";
