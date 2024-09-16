@@ -1,5 +1,3 @@
-// import BookingForm from "@/components/Booking/BookingForm";
-// import BookingSummary from "@/components/Booking/BookingSummary";
 import RideBooking from "@/components/Booking/RideBooking";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { Metadata } from "next";

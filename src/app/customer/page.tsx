@@ -1,7 +1,7 @@
 "use client";
 const CustomerPage = ()  =>{
   return(
-    <div>Hello World</div>
+    <div>This is the customer page</div>
   )
 
 }

@@ -1,7 +1,7 @@
 "use client";
 const AdminPage = ()  =>{
   return(
-    <div>Hello World</div>
+    <div>This is the admin page</div>
   )
 
 }

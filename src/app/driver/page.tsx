@@ -1,7 +1,7 @@
 "use client";
 const DriverPage = ()  =>{
   return(
-    <div>Hello World</div>
+    <div>This is the drivers page</div>
   )
 
 }
