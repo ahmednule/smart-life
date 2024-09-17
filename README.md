@@ -76,5 +76,3 @@ The application leverages AI to improve performance continually as more data is 
 Drivers have access to a well-designed dashboard to track peak times when clients are most likely to need rides.
 
 ---
-
-This revised README provides a clear overview of the project, highlights its key features, and gives specific details about the technologies and benefits it offers.
