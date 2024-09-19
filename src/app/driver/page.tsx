@@ -1,5 +1,5 @@
 "use client";
-const DriverPage = ()  =>{
+const DriverPage = ()  => {
   return(
     <div>This is the drivers page</div>
   )
