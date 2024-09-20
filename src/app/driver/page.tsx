@@ -60,7 +60,7 @@ const DriverPage = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6" style={{ paddingTop: "100px" }}>
       <h1 className="text-3xl font-bold mb-4">Driver Dashboard</h1>
 
       {/* Section: Bus Location */}
