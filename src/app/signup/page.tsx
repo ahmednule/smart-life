@@ -1,44 +1,11 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { supabase } from '../config/supabaseClient';
+//import { supabase } from '../../config/supabaseClient';
+
 
 const SignupPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-
-  // Sign up with email and password
-  const handleEmailSignup = async (e) => {
-    e.preventDefault();
-    setError(null);
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      console.log('User signed up:', data.user);
-    }
-  };
-
-  // Sign in with Google
-  const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-
-    if (error) {
-      setError(error.message);
-    }
-  };
-
   return (
     <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
       <div className="container">
@@ -52,17 +19,13 @@ const SignupPage = () => {
                 It’s totally free and super easy
               </p>
 
-              {error && (
-                <p className="mb-6 text-center text-red-500">{error}</p>
-              )}
-
-              
+              {/* Supabase Auth Component */}
               <div className="mb-6">
                 <Auth
                   supabaseClient={supabase}
                   appearance={{ theme: ThemeSupa }}
                   theme="dark"
-                  providers={['google','github']}
+                  providers={['google', 'github']}
                 />
               </div>
             </div>
