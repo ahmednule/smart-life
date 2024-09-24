@@ -99,9 +99,29 @@ const CustomerPage = () => {
       {/* Profile Management */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Profile Management</h2>
-        {/* Add form to edit profile */}
+        <div className="mb-4">
+          <label className="block mb-2">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={profile.name}
+            onChange={handleProfileChange}
+            className="border p-2 w-full"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={profile.email}
+            onChange={handleProfileChange}
+            className="border p-2 w-full"
+            placeholder="Enter your email"
+          />
+        </div>
       </div>
-
       {/* Booking History */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Booking History</h2>
