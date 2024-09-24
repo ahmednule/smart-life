@@ -2,7 +2,8 @@
 
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { supabase } from '../../config/supabaseClient'; // Correct import
+//import { supabase } from '../../config/supabaseClient';
+
 
 const SignupPage = () => {
   return (

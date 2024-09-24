@@ -1,2 +1,3 @@
-// src/config/supabaseClient.d.ts
-declare module '../config/supabaseClient';
+// src/config/supabaseClient.d.ts i am expecting typescript issues
+
+declare module '@supabase/supabase-js';
