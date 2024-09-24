@@ -10,6 +10,10 @@ const CustomerPage = () => {
   const [availableBuses, setAvailableBuses] = useState([]);
   const [selectedBus, setSelectedBus] = useState(null);
   const [error, setError] = useState(null);
+  const [profile, setProfile] = useState({ name: "", email: "" });
+  const [bookingHistory, setBookingHistory] = useState([]);
+  const [feedback, setFeedback] = useState("");
+  const [supportMessage, setSupportMessage] = useState("");
 
   // Simulated API call for available buses based on selected points
   const fetchAvailableBuses = async () => {
@@ -29,10 +33,28 @@ const CustomerPage = () => {
 
   const handleBooking = (busId) => {
     setSelectedBus(busId);
+    setBookingHistory([...bookingHistory, { busId, pickup: pickupPoint, dropoff: dropOffPoint }]);
     router.push({
       pathname: "/seat-selection",
       query: { pickup: pickupPoint, dropoff: dropOffPoint, busId },
     });
+  };
+
+  const handleProfileChange = (e) => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+  };
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    alert("Feedback submitted: " + feedback);
+    setFeedback(""); // Clear the feedback after submission
+  };
+
+  const handleSupportSubmit = (e) => {
+    e.preventDefault();
+    alert("Support message sent: " + supportMessage);
+    setSupportMessage(""); // Clear the message after submission
   };
 
   return (
@@ -94,8 +116,6 @@ const CustomerPage = () => {
       </div>
 
       {/* Additional Features */}
-      {/* You can implement the following features as separate components or sections */}
-
       {/* Profile Management */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Profile Management</h2>
@@ -122,22 +142,61 @@ const CustomerPage = () => {
           />
         </div>
       </div>
+
       {/* Booking History */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Booking History</h2>
-        {/* Display past trips and receipts */}
+        {bookingHistory.length > 0 ? (
+          <ul>
+            {bookingHistory.map((booking, index) => (
+              <li key={index} className="flex justify-between items-center p-2 border-b">
+                <span>Bus ID: {booking.busId}</span>
+                <span>Pickup: {booking.pickup}</span>
+                <span>Drop-off: {booking.dropoff}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No booking history available.</p>
+        )}
       </div>
 
       {/* Feedback and Ratings */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Feedback and Ratings</h2>
-        {/* Add a form for user feedback */}
+        <form onSubmit={handleFeedbackSubmit}>
+          <textarea
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            className="border p-2 w-full"
+            placeholder="Leave your feedback here"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded mt-2"
+          >
+            Submit Feedback
+          </button>
+        </form>
       </div>
 
       {/* Support Section */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Support Center</h2>
-        {/* Add contact/support information */}
+        <form onSubmit={handleSupportSubmit}>
+          <textarea
+            value={supportMessage}
+            onChange={(e) => setSupportMessage(e.target.value)}
+            className="border p-2 w-full"
+            placeholder="Enter your support message here"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded mt-2"
+          >
+            Send Message
+          </button>
+        </form>
       </div>
     </div>
   );
