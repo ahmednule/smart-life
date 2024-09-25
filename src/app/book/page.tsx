@@ -1,5 +1,5 @@
-import RideBooking from "@/components/Booking/RideBooking";
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import SeatSelectionPage from "@/components/seatselection/page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,9 +15,7 @@ const BookingPage = () => {
         pageName="Booking Page"
         description="Book your ride with Smart Life, an innovative AI-powered platform that optimizes routes and provides real-time vehicle tracking for a smooth travel experience."
       />
-      {/* <BookingForm />
-      <BookingSummary /> */}
-      <RideBooking/>
+     <SeatSelectionPage/>
     </>
   );
 };
