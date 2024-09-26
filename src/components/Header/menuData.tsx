@@ -21,7 +21,7 @@ const menuData: Menu[] = [
   },
   {
     id: 4,
-    title: "Pages",
+    title: "Book a Ride",
     newTab: false,
     submenu: [
       {
@@ -31,23 +31,17 @@ const menuData: Menu[] = [
         newTab: false,
       },
       {
-        id: 42,
-        title: "Contact Page",
-        path: "/contact",
-        newTab: false,
-      },
-      {
         id: 46,
-        title: "Sign In Page",
-        path: "/signup",
+        title: "Driver Page",
+        path: "/driver",
         newTab: false,
       },
-      {
-        id: 47,
-        title: "Sign Up Page",
-        path: "/signup",
-        newTab: false,
-      },
+      // {
+      //   id: 47,
+      //   title: "Sign Up Page",
+      //   path: "/signup",
+      //   newTab: false,
+      // },
       // {
       //   id: 48,
       //   title: "Error Page",
