@@ -34,10 +34,14 @@ const CustomerPage = () => {
   const handleBooking = (busId) => {
     setSelectedBus(busId);
     setBookingHistory([...bookingHistory, { busId, pickup: pickupPoint, dropoff: dropOffPoint }]);
-    router.push({
-      pathname: "/seat-selection",
-      query: { pickup: pickupPoint, dropoff: dropOffPoint, busId },
-    });
+  
+    const queryParams = new URLSearchParams({
+      pickup: pickupPoint,
+      dropoff: dropOffPoint,
+      busId: busId.toString(), // Ensure busId is a string
+    }).toString();
+  
+    router.push(`/seat-selection?${queryParams}`);
   };
 
   const handleProfileChange = (e) => {
