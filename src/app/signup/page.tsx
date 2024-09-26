@@ -9,7 +9,6 @@ const SignupPage = () => {
   const router = useRouter();  // Next.js router for navigation
   const [loading, setLoading] = useState(false);
 
-  // Handle OAuth sign-in for Google or GitHub
   const handleOAuthSignIn = async (provider: 'google' | 'github') => {
     setLoading(true); // Optional: To show a loading state
 
