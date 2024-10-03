@@ -225,4 +225,4 @@ const SigninPage = () => {
     </>
   );
 };
-export default SigninPage;
+export default customer;
