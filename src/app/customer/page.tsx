@@ -10,7 +10,7 @@ const CustomerPage = () => {
   const [availableBuses, setAvailableBuses] = useState([]);
   const [selectedBus, setSelectedBus] = useState(null);
   const [error, setError] = useState(null);
-  const [profile, setProfile] = useState({ name: "", email: "" });
+  const [profile, setProfile] = useState({ name: "", number: "" });
   const [bookingHistory, setBookingHistory] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [supportMessage, setSupportMessage] = useState("");
@@ -135,11 +135,11 @@ const CustomerPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2">Email</label>
+          <label className="block mb-2">Number</label>
           <input
-            type="email"
-            name="email"
-            value={profile.email}
+            type="number"
+            name="number"
+            value={profile.number}
             onChange={handleProfileChange}
             className="border p-2 w-full"
             placeholder="Enter your email"
