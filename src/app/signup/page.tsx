@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { supabase } from "@/components/lib/supabase"
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sign In Page | Smart Life",
@@ -6,6 +8,19 @@ export const metadata: Metadata = {
 
 };
 const SigninPage = () => {
+
+ const signInWithProvider = async (provider: "google" | "github") => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+    });
+
+    if (error) {
+      console.error('Error signing in:', error);
+    } else {
+      // router.push("/book");
+    }
+  };
+
   return (
     <>
       <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
