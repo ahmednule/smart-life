@@ -15,7 +15,7 @@ const mockBookedPassengers = [
   },
   {
     id: 2,
-    user: "Jane Smith",
+    user: "Jane",
     pickupPoint: "Station C",
     dropOffPoint: "Station D",
     status: "Unpaid",
