@@ -2,58 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-// Mocked API data for booked passengers
-const mockBookedPassengers = [
-  {
-    id: 1,
-    user: "John Doe",
-    pickupPoint: "Station A",
-    dropOffPoint: "Station B",
-    status: "Paid",
-    rideStatus: "Confirmed",
-    seatNumber: "A1",
-  },
-  {
-    id: 2,
-    user: "Jane",
-    pickupPoint: "Station C",
-    dropOffPoint: "Station D",
-    status: "Unpaid",
-    rideStatus: "Pending",
-    seatNumber: "B2",
-  },
-  {
-    id: 3,
-    user: "Sam Wilson",
-    pickupPoint: "Station E",
-    dropOffPoint: "Station F",
-    status: "Paid",
-    rideStatus: "Cancelled",
-    seatNumber: "C3",
-  },
-];
-
-const mockLocation = {
-  busLocation: "40.712776, -74.005974", // Mock GPS coordinates (e.g., New York City)
-  routeProgress: "50%", // Progress along the route
-};
-
 const DriverPage = () => {
   const [bookedPassengers, setBookedPassengers] = useState([]);
   const [busLocation, setBusLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Simulate fetching booked passengers
+  // Fetch booked passengers from the backend API
   useEffect(() => {
     const fetchBookedPassengers = async () => {
       try {
-        // Replace with actual API call to fetch booked passengers
-        // const response = await fetch('/api/booked-passengers');
-        // const data = await response.json();
-        setBookedPassengers(mockBookedPassengers);
+        const response = await fetch("/api/bookings");
+        if (!response.ok) {
+          throw new Error("Failed to fetch booked passengers");
+        }
+        const data = await response.json();
+        setBookedPassengers(data);
       } catch (error) {
-        setError("Failed to fetch booked passengers.");
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -69,7 +35,10 @@ const DriverPage = () => {
         // Replace with actual API call to fetch bus location
         // const response = await fetch('/api/bus-location');
         // const data = await response.json();
-        setBusLocation(mockLocation);
+        setBusLocation({
+          busLocation: "40.712776, -74.005974",
+          routeProgress: "50%",
+        });
       } catch (error) {
         setError("Failed to fetch bus location.");
       }
@@ -79,9 +48,31 @@ const DriverPage = () => {
   }, []);
 
   // Handle actions like "Start Ride" or "Mark as Paid"
-  const handleAction = (action, passengerId) => {
-    console.log(`${action} for passenger ID ${passengerId}`);
-    // Here, you would normally update passenger status via API
+  const handleAction = async (action, passengerId) => {
+    try {
+      const response = await fetch(`/api/bookings/${passengerId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update booking");
+      }
+
+      // Update local state
+      setBookedPassengers((prev) =>
+        prev.map((passenger) =>
+          passenger.id === passengerId
+            ? { ...passenger, status: action === "Mark as Paid" ? "Paid" : passenger.status }
+            : passenger
+        )
+      );
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -125,13 +116,12 @@ const DriverPage = () => {
               {bookedPassengers.map((passenger) => (
                 <tr key={passenger.id}>
                   <td className="border px-4 py-2">{passenger.user}</td>
-                  <td className="border px-4 py-2">{passenger.pickupPoint}</td>
-                  <td className="border px-4 py-2">{passenger.dropOffPoint}</td>
+                  <td className="border px-4 py-2">{passenger.pickup}</td>
+                  <td className="border px-4 py-2">{passenger.dropoff}</td>
                   <td className="border px-4 py-2">{passenger.seatNumber}</td>
                   <td className="border px-4 py-2">{passenger.status}</td>
                   <td className="border px-4 py-2">{passenger.rideStatus}</td>
                   <td className="border px-4 py-2">
-                    {/* Example Actions */}
                     <button
                       className="bg-green-500 text-white px-2 py-1 rounded mr-2"
                       onClick={() => handleAction("Start Ride", passenger.id)}
